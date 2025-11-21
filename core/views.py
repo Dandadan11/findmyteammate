@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import Profile
 
-# Create your views here.
+def home(request):
+    profiles = Profile.objects.all().order_by('-created_at')[:10]  # 10 последних анкет
+    return render(request, 'core/home.html', {'profiles': profiles})
