@@ -6,15 +6,33 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h1>🎮 FindMyTeammate работает!</h1>
+        <h1>🎮 FindMyTeammate</h1>
         <p class="lead">Найди идеальных тиммейтов для своих игр!</p>
         
         <div class="alert alert-success">
-            <strong>Ура! 🎉</strong> Шаблон загружается корректно!
+            <strong>Успех! 🎉</strong> Шаблон загружается корректно!
         </div>
         
+        <h2>Последние анкеты:</h2>
+        {% for profile in profiles %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ profile.title }}</h5>
+                <p class="card-text">
+                    <strong>Игра:</strong> {{ profile.game.name }}<br>
+                    <strong>Ранг:</strong> {{ profile.rank }}<br>
+                    <strong>Роль:</strong> {{ profile.role }}
+                </p>
+                <p class="card-text">{{ profile.description }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">
+            Пока нет анкет. <a href="/admin/core/profile/add/">Создай первую через админку</a>
+        </div>
+        {% endfor %}
+        
         <a href="/admin" class="btn btn-primary">Перейти в админку</a>
-        <a href="/admin/core/profile/add/" class="btn btn-outline-primary">Создать анкету</a>
     </div>
 </body>
 </html>
